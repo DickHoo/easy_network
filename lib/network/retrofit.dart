@@ -5,14 +5,13 @@ import 'defaultBuilder.dart';
 
 class Retrofit {
   static final Retrofit _retrofit = Retrofit();
-  late DefaultBuilder _defaultBuilder;
+  late final DefaultBuilder _defaultBuilder = DefaultBuilder();
 
   static Retrofit getInstance() {
     return _retrofit;
   }
 
   DefaultBuilder getBuilder() {
-    _defaultBuilder = DefaultBuilder();
     return _defaultBuilder;
   }
 
@@ -51,12 +50,13 @@ class Retrofit {
     return _response(response);
   }
 
-  Future<Response> postResponse(path, {Map<String, dynamic>? data,ProgressCallback? callback}) async {
-    return await getDio().post(path, data: data,onSendProgress:callback);
+  Future<Response> postResponse(path,
+      {Map<String, dynamic>? data, ProgressCallback? callback}) async {
+    return await getDio().post(path, data: data, onSendProgress: callback);
   }
 
-  Future<Response> downloadFile(urlPath,savePath,ProgressCallback? callback) async{
-    return await getDio().download(urlPath, savePath,onReceiveProgress:callback);
+  Future<Response> downloadFile(urlPath, savePath, ProgressCallback? callback) async {
+    return await getDio().download(urlPath, savePath, onReceiveProgress: callback);
   }
 
   dynamic _response(Response response) {
