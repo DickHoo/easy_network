@@ -1,11 +1,16 @@
 # easy_network
+Getting started
 
-A Flutter Network warehous.
+The first step is to include network into your project, for example:
 
-## Getting Started
+1.Add configuration to pubspec.yaml file
+~~~
+ easy_network:
+    git:
+      url: https://github.com/DickHoo/easy_network.git
+~~~
 
-For help getting started with Flutter development, view the online
-[documentation](https://flutter.dev/).
-
-For instructions integrating Flutter modules to your existing applications,
-see the [add-to-app documentation](https://flutter.dev/docs/development/add-to-app).
+2.lib usage
+~~~
+  
+~~~
