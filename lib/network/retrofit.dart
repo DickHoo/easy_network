@@ -3,9 +3,11 @@ import 'package:dio/dio.dart';
 import 'base/response_entity.dart';
 import 'defaultBuilder.dart';
 
+typedef CallBackHeaders = Function(Headers headers);
 class Retrofit {
   static final Retrofit _retrofit = Retrofit();
   final DefaultBuilder _defaultBuilder = DefaultBuilder();
+
 
   static Retrofit getInstance() {
     return _retrofit;
@@ -23,20 +25,20 @@ class Retrofit {
     getDio().options.headers.addAll(headers);
   }
 
-  Future<ResponseEntity?> get(path, {Map<String, dynamic>? data}) async {
+  Future<ResponseEntity?> get(path, {Map<String, dynamic>? data,CallBackHeaders? callBackHeaders}) async {
     Response? response;
     response = await getDio().get(path, queryParameters: data);
-    var responseEntity = _getResponseEntity(response);
+    var responseEntity = _getResponseEntity(response,callBackHeaders);
     if (null != responseEntity) {
       return Future.value(responseEntity);
     }
     return null;
   }
 
-  Future<ResponseEntity?> post(path, {dynamic? data}) async {
+  Future<ResponseEntity?> post(path, {dynamic? data,CallBackHeaders? callBackHeaders}) async {
     Response? response;
     response = await getDio().post(path, data: data);
-    var responseEntity = _getResponseEntity(response);
+    var responseEntity = _getResponseEntity(response,callBackHeaders);
     if (null != responseEntity) {
       return Future.value(responseEntity);
     }
@@ -66,7 +68,8 @@ class Retrofit {
     return null;
   }
 
-  ResponseEntity? _getResponseEntity(Response response) {
+  ResponseEntity? _getResponseEntity(Response response,CallBackHeaders? callBackHeaders) {
+    if(callBackHeaders!=null) callBackHeaders(response.headers);
     if (response.statusCode == HttpStatus.ok) {
       return ResponseEntity.fromJson(response.data);
     }

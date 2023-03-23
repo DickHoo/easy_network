@@ -12,5 +12,16 @@ The first step is to include network into your project, for example:
 
 2.lib usage
 ~~~
-  
+ 
+  Retrofit retrofit = Retrofit.getInstance()
+        .getBuilder()
+        .baseUrl("https://www.wanandroid.com")
+        .openLog()
+        .connectTimeout(Duration(seconds: connectTimeout))
+        .receiveTimeout(Duration(seconds: receiveTimeout))
+ 
+ 
+  var data = await retrofit.get("/article/list/0/json", data: map);
+  print("$data")       
+        
 ~~~
