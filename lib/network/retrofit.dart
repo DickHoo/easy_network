@@ -5,7 +5,7 @@ import 'defaultBuilder.dart';
 
 class Retrofit {
   static final Retrofit _retrofit = Retrofit();
-  late final DefaultBuilder _defaultBuilder = DefaultBuilder();
+  final DefaultBuilder _defaultBuilder = DefaultBuilder();
 
   static Retrofit getInstance() {
     return _retrofit;
