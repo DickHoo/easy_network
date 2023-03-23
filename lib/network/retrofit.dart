@@ -11,7 +11,7 @@ class Retrofit {
     return _retrofit;
   }
 
-  getBuilder() {
+  DefaultBuilder getBuilder() {
     _defaultBuilder = DefaultBuilder();
     return _defaultBuilder;
   }
